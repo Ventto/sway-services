@@ -22,10 +22,13 @@ source /etc/profile
 export XDG_CURRENT_DESKTOP=sway
 
 # save environment variables that will be added to systemd
-new_env=$(systemctl --user show-environment | cut -d'=' -f 1 | sort | comm -13 - <(env | cut -d'=' -f 1 | sort))
+sys_env=$(systemctl --user show-environment | cut -d'=' -f 1 | sort)
+user_env=$(env | cut -d'=' -f 1 | sort)
+new_env=$(echo "$sys_env" | comm -13 - <(echo "$user_env"))
+shared_env=$(echo "$sys_env" | comm -12 - <(echo "$user_env"))
 
 # import environment variables from the login manager
-systemctl --user import-environment
+systemctl --user import-environment $new_env $shared_env
 
 # then start the service
 systemctl --wait --user start sway.service
