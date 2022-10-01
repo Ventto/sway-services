@@ -2,6 +2,7 @@ services = [
   'sway-session-pre.target',
   'sway-session.target',
   'sway.service',
+  'swayidle.service',
   'wayland-session-pre.target',
   'wayland-session.target',
 ]
