@@ -19,7 +19,7 @@ done
 # /etc/profile contains a lot of important environment variables
 source /etc/profile
 
-export XDG_CURRENT_DESKTOP=sway
+export XDG_CURRENT_DESKTOP=Unity
 
 # save environment variables that will be added to systemd
 sys_env=$(systemctl --user show-environment | cut -d'=' -f 1 | sort)
